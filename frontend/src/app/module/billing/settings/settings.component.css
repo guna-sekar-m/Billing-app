@@ -1,0 +1,36 @@
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: var(--primary-ems-color);
+  background-color: var(--bs-nav-pills-link-active-bg);
+}
+
+.custom-fluid{
+  width: 64%;
+  height: auto;
+}
+
+.my-w-50{
+  width : 25%
+}
+
+@media (max-width:992px) {
+  .my-w-50{
+    width : 100%
+  }
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance:textfield;
+}
+
+.theme-bg{
+  background: linear-gradient(pink,rgb(241, 241, 164),rgb(158, 243, 201),rgb(123, 173, 238));
+}

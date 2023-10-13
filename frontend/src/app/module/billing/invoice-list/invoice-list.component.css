@@ -1,0 +1,26 @@
+.dropdown-menu {
+  --bs-dropdown-link-active-color: #000000 !important;
+  --bs-dropdown-link-active-bg: #ffffff !important;
+
+}
+
+.input-group {
+  width: 25% !important;
+}
+@media (min-width:1305px) {
+  .input-group {
+    width: 18% !important;
+  }
+}
+
+@media (max-width:558px) {
+  .input-group {
+    width: 100% !important;
+  }
+}
+
+@media(min-width:992px) {
+  .table-height{
+    min-height: calc(100vh - 359px)
+  }
+}

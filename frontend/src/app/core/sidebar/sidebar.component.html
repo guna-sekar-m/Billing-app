@@ -1,0 +1,66 @@
+<nav class="navbar position-fixed z-1">
+    <div class="container-fluid">
+
+      <div class="offcanvas offcanvas-start border-0 sidebar show sidbar-shadow" [ngClass]="theme?theme.sidemenu_theme:''" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header d-none">
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="menu-title">
+              <span>Main Menu</span>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" [routerLink]="['/billing/app/invoice-dashboard']" [routerLinkActive]="['active']"><i class="fa-solid fa-table-cells-large"></i> <span> Dashboard</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/billing/app/invoice-list']" [routerLinkActive]="['active']"><i class="fa-solid fa-file-invoice"></i> <span> Invoices</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/billing/app/items']" [routerLinkActive]="['active']"><i class="fa-solid fa-boxes-stacked"></i> <span> Items</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/billing/app/purchase']" [routerLinkActive]="['active']"><i class="fa-solid fa-cart-shopping"></i> <span> Purchase</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link d-none" href="#"><i class="fa-solid fa-chart-simple"></i> <span> Reports</span></a>
+            </li>
+            <li class="menu-title">
+              <span>License</span>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link someClass"  [routerLink]="['/billing/app/product-license']" [routerLinkActive]="['active']"><i class="fa-brands fa-keycdn"></i> <span>Product License</span></a>
+            </li>
+            <li class="menu-title">
+              <span>Others</span>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link someClass"  [routerLink]="['/billing/app/settings']" [routerLinkActive]="['active']"><i class="fa-solid fa-gear"></i> <span> Settings</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link someClass" role="button" (click)="logout()"><i class="fa-solid fa-right-from-bracket"></i> <span> Sign out</span></a>
+            </li>
+          </ul>
+          <!--
+          <div *ngIf="TokenService.getUserDetails().data.Product_Status != 'Active'" id="header" class="ribbon mt-2 rounded text-center">
+            <h6><a ><span *ngIf="TokenService.getUserDetails().data.Product_Status=='Expired'">License</span> {{TokenService.getUserDetails().data.Product_Status}} </a></h6>
+          </div>-->
+          <div id="header" class=" mt-3 rounded text-center">
+            <h6 *ngIf="TokenService.getUserDetails().data.Product_Status=='Trial'">
+              <a *ngIf="theme&&!theme.sidemenu_theme" class="nav-link active back-shadow px-2 rounded py-2 bg-ems-primary">Trial Version</a>
+              <button *ngIf="theme&&theme.sidemenu_theme" class="btn py-2 bg-ems-primary">Trial Version</button>
+            </h6>
+            <h6 *ngIf="TokenService.getUserDetails().data.Product_Status=='Active'">
+              <a *ngIf="theme&&!theme.sidemenu_theme" class="nav-link active back-shadow px-2 rounded py-2 bg-ems-primary">Licensed Version</a>
+              <button *ngIf="theme&&theme.sidemenu_theme" class="btn py-2 bg-ems-primary">Licensed Version</button>
+            </h6>
+            <h6 *ngIf="TokenService.getUserDetails().data.Product_Status=='Expired'">
+              <a *ngIf="theme&&!theme.sidemenu_theme" class="nav-link active back-shadow px-2 rounded py-2 bg-ems-primary">License Expired</a>
+              <button *ngIf="theme&&theme.sidemenu_theme" class="btn py-2 bg-ems-primary">License Expired</button>
+            </h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>

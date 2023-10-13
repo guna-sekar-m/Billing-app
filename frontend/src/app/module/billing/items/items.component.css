@@ -1,0 +1,15 @@
+tr:nth-child(odd) .bg-danger-light {
+    background-color: #F7F7FA !important;
+    color: var(--primary-ems-color) !important;
+    border-radius: 50px;
+}
+tr:nth-child(even) .bg-danger-light {
+    background-color: #ffffff !important;
+    color: var(--primary-ems-color) !important;
+    border-radius: 50px;
+}
+
+.xls-bg {
+  border: 1px solid #28C76F;
+  color: #28C76F;
+}

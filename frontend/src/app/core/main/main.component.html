@@ -1,0 +1,8 @@
+<app-header/>
+<app-sidebar/>
+<main class="my-container p-lg-3 pt-2 position-relative z--1 mb-0 mb-lg-5" id="my-container">
+  <router-outlet></router-outlet>
+</main>
+<app-footer class="d-none d-lg-block" />
+
+<a class="btn d-block d-lg-none rounded-circle py-2 fixed-bottom1 bg-ems-primary text-white back-shadow" [routerLink]="['/billing/app/add-invoice']" [target]="'_blank'"><i class="fa-solid fa-plus fa-lg"></i></a>

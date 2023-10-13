@@ -1,0 +1,16 @@
+.btn.fixed-bottom1 {
+  position: fixed;
+  right: 25px !important;
+  bottom: 20px !important;
+  z-index: 1030;
+}
+
+#my-container .container-fluid {
+  -webkit-transition: transform 0.3s ease-in-out !important;
+  -ms-transition: transform 0.3s ease-in-out !important;
+  transition: transform 0.3s ease-in-out !important;
+}
+
+#my-container {
+  border-top-left-radius: 30px;
+}

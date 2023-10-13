@@ -1,0 +1,286 @@
+<p-toast></p-toast>
+<section>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xl-12 col-md-12">
+        <div class="card shadow-none bg-comman card1 w-100 mb-3">
+          <div class="card-body">
+            <form ngNativeValidate>
+            <div class="row mb-3">
+              <div class="col-xxl-7 col-xl-8 col-lg-8 col-md-8">
+                <div class="row">
+                  <h6 class="fw-bold lead">Customer Details</h6>
+                  <div class="col-md-3">
+                    <input type="text" class="form-control mb-2" placeholder="Customer Name" [(ngModel)]="invoicedetails().Customer_Name" name="Customer_Name" style="height: 50px" required>
+                  </div>
+                  <div class="col-md-9">
+                    <div class="form-floating">
+                      <textarea class="form-control mb-2"  placeholder="Customer Address" [(ngModel)]="invoicedetails().Address" name="Address" style="height: 50px" required></textarea>
+                      <label for="floatingTextarea">Customer Address</label>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <input type="text" class="form-control mb-2" placeholder="Customer City" [(ngModel)]="invoicedetails().City" name="City" required>
+                  </div>
+                  <div class="col-md-3">
+                    <input type="text" class="form-control mb-2" placeholder="Customer State" [(ngModel)]="invoicedetails().State" name="State" required>
+                  </div>
+                  <div class="col-md-3">
+                    <input type="number" class="form-control mb-2" placeholder="Zip Code" [(ngModel)]="invoicedetails().Zip_Code" name="Zip_Code" required>
+                  </div>
+                  <div class="col-md-3">
+                    <input type="number" class="form-control" placeholder="Mobile Number" [(ngModel)]="invoicedetails().Customer_Mobilenumber" name="Customer_Mobilenumber" required>
+                  </div>
+                </div>
+              </div>
+              <div class="d-none d-md-none d-lg-none d-xxl-block d-xl-none  col-xxl-3"></div>
+              <div class="col-xxl-2 col-xl-4 col-lg-4 col-md-4">
+                <h6 class="fw-bold lead">Invoice</h6>
+                <input type="text" class="form-control mb-2" placeholder="Invoice ID" [(ngModel)]="invoicedetails().Invoice_ID" name="Invoice_ID" [readOnly]="true">
+                <p-calendar [(ngModel)]="invoicedetails().Invoice_Date" name="Invoice_Date" appendTo="body" [dataType]="'string'" [showButtonBar]="true" [showIcon]="true" ></p-calendar>
+              </div>
+
+              <!--<div class="customer-details">
+                <h6 class="fw-bold lead">Customer Details</h6>
+                <input type="text" class="form-control mb-2" placeholder="Customer Name" [(ngModel)]="invoicedetails().Customer_Name" name="Customer_Name">
+                <input type="text" class="form-control mb-2" placeholder="Customer Address" [(ngModel)]="invoicedetails().Address" name="Address">
+                <input type="text" class="form-control mb-2" placeholder="Customer City" [(ngModel)]="invoicedetails().City" name="City">
+                <input type="text" class="form-control mb-2" placeholder="Customer State" [(ngModel)]="invoicedetails().State" name="State">
+                <input type="text" class="form-control" placeholder="Customer Mobilenumber" [(ngModel)]="invoicedetails().Customer_Mobilenumber" name="Customer_Mobilenumber">
+              </div>
+              <div class="Invoice-details">
+                <h6 class="fw-bold lead">Invoice</h6>
+                <input type="text" class="form-control mb-2" placeholder="Invoice ID" [(ngModel)]="invoicedetails().Invoice_ID" name="Invoice_ID" [readOnly]="true">
+                <p-calendar [(ngModel)]="invoicedetails().Invoice_Date" name="Invoice_Date" appendTo="body" [dataType]="'string'" [showButtonBar]="true" [showIcon]="true" ></p-calendar>
+              </div> -->
+            </div>
+            <div class="table-responsive card-table table-height">
+              <p-table #dt [value]="invoiceItems()" dataKey="id" styleClass="p-datatable-striped p-datatable-gridlines">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th class=" text-center">#</th>
+                    <th>Item Code</th>
+                    <th>Item Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>GST Type</th>
+                    <th>GST%</th>
+                    <th>Discount</th>
+                    <th>Amount</th>
+                    <th>Discription</th>
+                    <th>Action</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-item let-editing="editing" let-rowIndex="rowIndex">
+                  <tr class="spacer">
+                    <td></td>
+                  </tr>
+                  <tr class="data">
+                    <th class="bg-white rounded-start text-center">{{rowIndex+1}}</th>
+                    <td [pEditableColumn]="item.Item_Code" pEditableColumnField="Item_Code">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <p-autoComplete [(ngModel)]="item.Item_Code" [suggestions]="suggestions" name="Item_Code" (completeMethod)="search($event,'Item_Code')" field="Item_Code">
+                            <ng-template let-data pTemplate="item">
+                              <div class="flex align-items-center gap-2" (click)="loaddata(data,rowIndex)">
+                                <div>{{ data.Item_Code }}</div>
+                              </div>
+                            </ng-template>
+                          </p-autoComplete>
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{ item.Item_Code }}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                    <td [pEditableColumn]="item.Item_Name" pEditableColumnField="Item_Name">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <p-autoComplete [(ngModel)]="item.Item_Name" [suggestions]="suggestions" name="Item_Name" (completeMethod)="search($event,'Item_Name')" field="Item_Name">
+                            <ng-template let-data pTemplate="item">
+                              <div class="flex align-items-center gap-2" (click)="loaddata(data,rowIndex)" (keydown)="handleKeyboardEvent($event)">
+                                <div>{{ data.Item_Name }}</div>
+                              </div>
+                            </ng-template>
+                          </p-autoComplete>
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{ item.Item_Name }}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                    <td [pEditableColumn]="item.Quantity" pEditableColumnField="Quantity">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input type="number" class="form-control" [(ngModel)]="item.Quantity" name="Quantity" (change)="change(rowIndex)" (keydown.enter)="change(rowIndex)">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{ item.Quantity }}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                    <td [pEditableColumn]="item.Sale_Price" pEditableColumnField="Sale_Price" >
+                      <p-cellEditor>
+                        <ng-template pTemplate="input" >
+                          <input type="number" class="form-control" [(ngModel)]="item.Sale_Price" name="Sale_Price" (change)="change(rowIndex)" (keydown.enter)="change(rowIndex)" >
+                          <!--{{item.Tax_Status =='Inclusive'? ((item.Quantity * item.Sale_Price)-((item.Quantity * item.Sale_Price)*item.Tax_Rate)/(100*1 + item.Tax_Rate*1)).toFixed(2) : item.Sale_Price}}-->
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{ item.Sale_Price }}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                    <td [pEditableColumn]="item.Tax_Status" pEditableColumnField="Tax_Status">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input type="text" class="form-control d-none" [(ngModel)]="item.Tax_Status" name="Tax_Status" (change)="change(rowIndex)" (keydown.enter)="change(rowIndex)">
+                          <select class="form-select" aria-label="Default select example" [(ngModel)]="item.Tax_Status" name="Tax_Status" (change)="change(rowIndex)" (keydown.enter)="change(rowIndex)">
+                            <option value="Inclusive">Include</option>
+                            <option value="Exclusive">Exclude</option>
+                          </select>
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{ item.Tax_Status }}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                    <td [pEditableColumn]="item.Tax_Rate" pEditableColumnField="Tax_Rate">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input type="number" class="form-control" [(ngModel)]="item.Tax_Rate" name="Tax_Rate" (change)="change(rowIndex)" (keydown.enter)="change(rowIndex)">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{ item.Tax_Rate }}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                    <!--<td [pEditableColumn]="item.Tax_Rate" pEditableColumnField="Tax_Rate">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input type="text" class="form-control" [(ngModel)]="item.Tax_Rate" name="Tax_Rate" >
+                          {{ item.Tax_Rate }}
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{ item.Tax_Rate }}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>-->
+
+                    <td [pEditableColumn]="item.Discount" pEditableColumnField="Discount">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input type="number" class="form-control" [(ngModel)]="item.Discount" name="Discount" (change)="change(rowIndex)" (keydown.enter)="change(rowIndex)">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{ item.Discount }}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                    <td [pEditableColumn]="item.Amount" pEditableColumnField="Amount">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input type="number" class="form-control" [(ngModel)]="item.Tax_Status =='Inclusive'? ((((item.Quantity * item.Sale_Price)-((item.Quantity * item.Sale_Price)*item.Discount)/100)-(((item.Quantity * item.Sale_Price)-((item.Quantity * item.Sale_Price)*item.Discount)/100)*item.Tax_Rate)/(100*1 + item.Tax_Rate*1)+((((item.Quantity * item.Sale_Price)-((item.Quantity * item.Sale_Price)*item.Discount)/100)*item.Tax_Rate)/(100*1 + item.Tax_Rate*1)))) : (((item.Quantity * item.Sale_Price)*item.Tax_Rate/100)+(item.Quantity * item.Sale_Price))-item.Discount" name="Amount" hidden>
+                          {{item.Tax_Status =='Inclusive'? ((((item.Quantity * item.Sale_Price)-((item.Quantity * item.Sale_Price)*item.Discount)/100)-(((item.Quantity * item.Sale_Price)-((item.Quantity * item.Sale_Price)*item.Discount)/100)*item.Tax_Rate)/(100*1 + item.Tax_Rate*1)+((((item.Quantity * item.Sale_Price)-((item.Quantity * item.Sale_Price)*item.Discount)/100)*item.Tax_Rate)/(100*1 + item.Tax_Rate*1)))) : ((((item.Quantity * item.Sale_Price)-((item.Quantity * item.Sale_Price)*item.Discount)/100)*item.Tax_Rate/100)+((item.Quantity * item.Sale_Price)-((item.Quantity * item.Sale_Price)*item.Discount)/100)).toFixed(0) }}
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{item.Tax_Status =='Inclusive'? ((((item.Quantity * item.Sale_Price)-((item.Quantity * item.Sale_Price)*item.Discount)/100)-(((item.Quantity * item.Sale_Price)-((item.Quantity * item.Sale_Price)*item.Discount)/100)*item.Tax_Rate)/(100*1 + item.Tax_Rate*1)+((((item.Quantity * item.Sale_Price)-((item.Quantity * item.Sale_Price)*item.Discount)/100)*item.Tax_Rate)/(100*1 + item.Tax_Rate*1)))) : ((((item.Quantity * item.Sale_Price)-((item.Quantity * item.Sale_Price)*item.Discount)/100)*item.Tax_Rate/100)+((item.Quantity * item.Sale_Price)-((item.Quantity * item.Sale_Price)*item.Discount)/100)).toFixed(0) }}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                    <td [pEditableColumn]="item.Discription" pEditableColumnField="Discription">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <textarea class="form-control" [(ngModel)]="item.Discription" name="Discription" style="height: 30px"></textarea>
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{ item.Discription }}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                    <td>
+                      <a class="text-danger" role="button" (click)="deletedata(rowIndex)"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="footer">
+                  <tr class="border-top">
+                    <th></th>
+                    <th class="py-2 d-flex justify-content-between">
+                      <a class="text-primary me-1 text-decoration-none d-flex align-items-center" role="button" (click)="addItem()" (keydown)="handleKeyPress($event)">
+                        <i class="fa-solid fa-circle-plus me-1"></i><span class="d-none d-md-block"> Add Row</span>
+                      </a>
+                    </th>
+                    <th><span>Total</span></th>
+                    <th>{{Totalquatity()}}</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <th colspan="2">
+                      <label for="validationCustom04" class="form-label">Paid Status</label>
+                      <select class="form-select" [(ngModel)]="invoicedetails().Paid_Status" name="Paid_Status" aria-label="Default select example" required>
+                        <option selected disabled value="">Paid Status</option>
+                        <option value="Unpaid">Unpaid</option>
+                        <option value="Paid">Paid</option>
+                        <option value="Cancelled">Cancelled</option>
+                      </select>
+                    </th>
+                    <th colspan="2">
+                      <label for="validationCustom04" class="form-label">Payment Method</label>
+                      <select class="form-select" [(ngModel)]="invoicedetails().Payment_Method" name="Payment_Method" aria-label="Default select example" required>
+                        <option selected disabled value="">Payment Method</option>
+                        <option value="Cash">Cash</option>
+                        <option value="Card">Card</option>
+                      </select>
+                    </th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th>Total Amount:</th>
+                    <th class="py-5">{{Totalamount()| number:'1.0-2'}}</th>
+                    <th></th>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="d-flex justify-content-end flex-wrap gap-1">
+                  <div class="dropdown">
+                    <button class="btn btn-success" type="button" type="button" data-bs-toggle="dropdown" aria-expanded="false" ><i class="fa-solid fa-file-invoice"></i> Save and Print</button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item w-100" role="button" (click)="saveandprintinvoice('a4')">A4</a></li>
+                      <li><a class="dropdown-item w-100" role="button" (click)="saveandprintinvoice('mini')">Thermal</a></li>
+                    </ul>
+                  </div>
+
+                  <button class="btn btn-primary" type="submit" (click)="saveinvoice('a4')"><i class="fa-solid fa-circle-check"></i> Save</button>
+                </div>
+              </div>
+            </div>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<p-dialog header="Invoice" [modal]="true" [(visible)]="invoiceprint" [maximizable]="true" styleClass="bg-comman border-primary custome-size">
+  <span [innerHTML]="printdata|safehtml"></span>
+  <p-footer>
+    <button class="btn btn-primary" (click)="this[printfun](printdata)">Print</button>
+    <button class="btn btn-primary" (click)="this[downloadfun](printdata)">Download</button>
+    <button class="btn btn-primary" (click)="invoiceprint=false">Cancel</button>
+  </p-footer>
+</p-dialog>

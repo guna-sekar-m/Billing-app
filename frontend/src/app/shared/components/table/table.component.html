@@ -1,0 +1,50 @@
+<div class="card mb-3 bg-comman flex-fill p-1">
+    <div class="card-header d-flex align-items-center justify-content-between border-bottom-0 bg-white rounded fs-xs flex-wrap">
+      <h5 class="card-title">{{tablepanelsetting.paneltitle}}</h5>
+      <div class="d-flex justify-content-between gap-2">
+        <a href="#" class="btn btn-primary bg-ems-primary border-ems-primary w-100" *ngIf="tablepanelsetting.addrecord['viewactive']==true" [routerLink]="[tablepanelsetting.addrecord.routerlink]"><i class="fas fa-plus"></i>{{tablepanelsetting.addrecord.label}}</a>
+        <a href="#" class="btn btn-primary bg-ems-primary border-ems-primary" *ngIf="tablepanelsetting.importrecord['viewactive']==true"><i class="fa-solid fa-upload"></i></a>
+        <button class="btn btn-primary bg-ems-primary border-ems-primary" icon="pi pi-filter-slash"
+          (click)="clear(dt)">Clear</button>
+        <input #input type="text" class="form-control" (input)="dt.filterGlobal(input.value, 'contains')"
+          placeholder="Search keyword" />
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive card-table">
+
+        <p-table #dt [value]="datas" styleClass="p-datatable-sm p-datatable-striped" dataKey="id" [paginator]="true" [rows]="5" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10, 25, 50]">
+          <ng-template pTemplate="header">
+              <tr>
+                <th style="width: 4rem">
+                  <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th pSortableColumn="{{ col.header }}" style="width:20%" *ngFor="let col of Tablecolumns">{{ col.header }}</th>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-product>
+            <tr>
+              <td>
+                <p-tableCheckbox [value]="product.id"></p-tableCheckbox>
+            </td>
+                <td>{{ product.code }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.category }}</td>
+                <td>{{ product.quantity }}</td>
+                <td>
+                  <div class="actions">
+                    <a href="#" class="btn btn-sm bg-success-light me-2">
+                      <i class="fa-regular fa-eye"></i>
+                    </a>
+                    <a href="#" class="btn btn-sm bg-danger-light">
+                      <i class="fa-regular fa-pen-to-square"></i>
+                    </a>
+                  </div>
+                </td>
+            </tr>
+        </ng-template>
+          
+      </p-table>
+      </div>
+    </div>
+  </div>

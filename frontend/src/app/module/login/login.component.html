@@ -1,0 +1,46 @@
+<section class="ems-login vh-100 d-flex justify-content-center align-items-center">
+  <div class="container">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-md-4">
+        <div class="ems-login-form card border-0">
+
+          <div class="card-body p-lg-5 p-3 my-3 my-md-0">
+            <div class="mb-4">
+              <h1 class="card-title mb-4 mb-md-5 text-center">Sign in</h1>
+            </div>
+
+            <form class="mb-2" #emsloginform="ngForm" (ngSubmit)="emslogin(emsloginform)" ngNativeValidate>
+              <div class="form-group position-relative mb-4">
+                <label>Email <span class="login-danger">*</span></label>
+                <input class="form-control py-2 rounded-pill" type="email" [(ngModel)]="emslogindata.Email" name="Email" required>
+                <span class="profile-views d-none"><i class="fa-regular fa-circle-user"></i></span>
+              </div>
+              <div class="form-group position-relative mb-4">
+                <label>Password <span class="login-danger">*</span></label>
+                <input class="form-control py-2 rounded-pill" type="password" [(ngModel)]="emslogindata.Password" name="Password" required>
+                <span class="profile-views d-none"><i class="fa-solid fa-lock"></i></span>
+              </div>
+              <div class="col-12 mb-4 d-flex justify-content-between d-none">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="invalidCheck">
+                  <label class="form-check-label" for="invalidCheck"> Remember me </label>
+                </div>
+                <a href="#" class="text-decoration-none" [routerLink]="['/forgot-password']">Forgot Password?</a>
+              </div>
+
+              <div class="col-12">
+                <button class="btn btn-primary rounded-pill w-100 p-2" type="submit">Sign in</button>
+              </div>
+            </form>
+            <div class="text-center">
+              <a class="text-decoration-none" routerLink="/forgot-password">Forgot Password</a> <br>
+              <button class="btn btn-sm btn-primary rounded-pill px-4 mt-2" routerLink="/register">Create Account</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p-toast [breakpoints]="{'920px': {width: '100%', right: '0', left: '0'}}"></p-toast>
+    </div>
+  </div>
+</section>
+

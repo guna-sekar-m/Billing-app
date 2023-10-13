@@ -1,0 +1,114 @@
+<p-toast></p-toast>
+<div class="container-fluid ems-login">
+  <div class="row justify-content-center align-items-center vh-100">
+    <div class="col-md-4 card p-4">
+
+      <h3 *ngIf="!this.formstatus||this.formstatus == 'Email already exist'" class="text-center">Register</h3>
+      <h3 *ngIf="this.formstatus == 'OTP sended'||this.formstatus == 'Invalid OTP'" class="text-center">OTP Verification</h3>
+      <h3 *ngIf="this.formstatus == 'OTP Verified'" class="text-center">Account Details</h3>
+
+      <!--Email-->
+      <div *ngIf="!this.formstatus||this.formstatus == 'Email already exist'" class="card-body">
+        <form class="mb-2" #emsregisterform="ngForm" (ngSubmit)="emsregister(emsregisterform)" ngNativeValidate>
+          <div class="mb-3 form-group position-relative">
+            <label for="Email" class="form-label">Email address <span class="login-danger">*</span></label>
+            <input type="email" class="form-control py-2 rounded-pill" [(ngModel)]="Email" id="Email" name="Email" required>
+          </div>
+
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary rounded-pill">Sent OTP</button>
+          </div>
+        </form>
+        <div class="text-center">
+          <a class="text-decoration-none" routerLink="/login">Already have a account</a>
+        </div>
+      </div>
+
+      <!--OTP Verified-->
+      <div *ngIf="this.formstatus == 'OTP sended'||this.formstatus == 'Invalid OTP'" class="card-body">
+        <form class="mb-2" #emsotpform="ngForm" (ngSubmit)="otpverify(emsotpform)" ngNativeValidate>
+          <div class="mb-3 form-group position-relative">
+            <label for="Email" class="form-label">OTP <span class="login-danger">*</span></label>
+            <input type="number" class="form-control py-2 rounded-pill" ngModel #OTP="ngModel" id="OTP" name="OTP" required>
+          </div>
+
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary rounded-pill">Verify OTP</button>
+          </div>
+        </form>
+        <div class="text-center">
+          <a class="text-decoration-none" role="button" (click)="resendotp()">Resend OTP</a>
+        </div>
+      </div>
+
+      <!--Account Details-->
+      <div *ngIf="this.formstatus == 'OTP Verified'" class="card-body">
+        <form class="mb-2" #emsdetaildform="ngForm" (ngSubmit)="detaild(emsdetaildform)" ngNativeValidate>
+          <div class="mb-3 form-group position-relative">
+            <label for="Name" class="form-label">Name <span class="login-danger">*</span></label>
+            <input type="text" class="form-control py-2 rounded-pill" ngModel #Name="ngModel" id="Name" name="Name" required>
+          </div>
+
+          <div class="mb-3 form-group position-relative">
+            <label for="Name" class="form-label">Password <span class="login-danger">*</span></label>
+            <input type="password" class="form-control py-2 rounded-pill" #Pass ngModel #Password="ngModel" id="Password" name="Password" required>
+          </div>
+
+          <div class="mb-3 form-group position-relative">
+            <label for="Name" class="form-label">Confirm Password <span class="login-danger">*</span></label>
+            <input type="password" class="form-control py-2 rounded-pill" ngModel #Confirm_Password="ngModel" id="Confirm_Password"  (change)="checkpass(Password,Confirm_Password)" name="Confirm_Password" required>
+            <p *ngIf="password == true" class="position-absolute reaction">
+              <i class="fa-solid fa-check" style="color: #07974d;"></i>
+            </p>
+            <p *ngIf="password == false" class="position-absolute reaction">
+              <i class="fa-solid fa-xmark" style="color: #d70f19;"></i>
+            </p>
+          </div>
+
+          <div class="mb-3 form-group position-relative">
+            <label for="Organization_Name" class="form-label"> Organization Name <span class="login-danger">*</span></label>
+            <input type="text" class="form-control py-2 rounded-pill" ngModel #Organization_Name="ngModel" id="Organization_Name" name="Organization_Name" required>
+          </div>
+
+          <div class="mb-3 form-group position-relative">
+            <label for="Mobile_Number" class="form-label"> Mobile Number <span class="login-danger">*</span></label>
+            <input type="number" class="form-control py-2 rounded-pill" ngModel #Mobile_Number="ngModel" id="Mobile_Number" name="Mobile_Number" required>
+          </div>
+
+          <div class="mb-3 form-group position-relative">
+            <label for="Address" class="form-label"> Address <span class="login-danger">*</span></label>
+            <input type="text" class="form-control py-2 rounded-pill" ngModel #Address="ngModel" id="Address" name="Address" required>
+          </div>
+
+          <div class="mb-3 form-group position-relative">
+            <label for="City" class="form-label"> City <span class="login-danger">*</span></label>
+            <input type="text" class="form-control py-2 rounded-pill" ngModel #City="ngModel" id="City" name="City" required>
+          </div>
+
+          <div class="mb-3 form-group position-relative">
+            <label for="State" class="form-label"> State <span class="login-danger">*</span></label>
+            <input type="text" class="form-control py-2 rounded-pill" ngModel #State="ngModel" id="State" name="State" required>
+          </div>
+
+          <div class="mb-3 form-group position-relative">
+            <label for="Country" class="form-label"> Country <span class="login-danger">*</span></label>
+            <input type="text" class="form-control py-2 rounded-pill" ngModel #Country="ngModel" id="Country" name="Country" required>
+          </div>
+
+          <div class="mb-3 form-group position-relative">
+            <label for="Zip_Code" class="form-label"> Zip Code <span class="login-danger">*</span></label>
+            <input type="number" class="form-control py-2 rounded-pill" ngModel #Zip_Code="ngModel" id="Zip_Code" name="Zip_Code" required>
+          </div>
+
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary rounded-pill">Submit</button>
+          </div>
+        </form>
+        <div class="text-center d-none">
+          <a class="text-decoration-none" role="button" (click)="resendotp()">Resend OTP</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

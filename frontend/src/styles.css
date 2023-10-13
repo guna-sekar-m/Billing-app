@@ -1,0 +1,504 @@
+/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+@import url('../node_modules/@fontsource/nunito-sans/index.css');
+/*
+:root{
+  --primary-ems-color:#FE9F43;
+  --secondary-ems-color:#18aefa;
+  --primary-light-color:#fcc48c;
+  --back-shadow : 0 2px 2px rgba(0, 0, 0, .1), 0 2px 5px rgba(0, 0, 0, .1);
+  --font-style : 'Nunito Sans'
+}
+*/
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  --primary-ems-color:rgb(254, 159, 67);
+  --secondary-ems-color:#18aefa;
+  --primary-light-color:#fcc48c;
+  --background-theme: #f5f3f0;
+  --back-shadow : 0 2px 2px rgba(0, 0, 0, .1), 0 2px 5px rgba(0, 0, 0, .1);
+  --font-style : 'Nunito Sans';
+  --hover-bg : rgba(254, 159, 67, 0.08);
+  --my-text : white;
+  background-color: var(--background-theme) !important;
+  color: #333 !important;
+  font-family: var(--font-style) !important;
+  font-size: 15px;
+  height: 100%;
+  line-height: 1.5!important;
+  overflow-y: auto!important;
+  padding-right: 0px!important;
+  padding-bottom: 0!important;
+}
+
+/*Heder Theme*/
+header.orange,header.orange a,footer.orange{
+  --my-text:rgb(254, 159, 67);
+  --bs-btn-hover-color : black;
+  --primary-ems-color:rgb(255, 255, 255);
+  background-color: rgb(254, 159, 67) !important;
+  color: white !important;
+}
+
+header.darkblue,header.darkblue a,footer.darkblue{
+  --my-text:rgb(99, 102, 241);
+  --bs-btn-hover-color : black;
+  --primary-ems-color:rgb(255, 255, 255);
+  background-color: rgb(99, 102, 241) !important;
+  color: white !important;
+}
+
+header.lightblue,header.lightblue a,footer.lightblue{
+  --my-text:rgb(59, 130, 246);
+  --bs-btn-hover-color : black;
+  --primary-ems-color:rgb(255, 255, 255);
+  background-color: rgb(59, 130, 246) !important;
+  color: white !important;
+}
+
+header.purple,header.purple a, footer.purple{
+  --my-text:rgb(139, 92, 246);
+  --bs-btn-hover-color : black;
+  --primary-ems-color:rgb(255, 255, 255);
+  background-color: rgb(139, 92, 246) !important;
+  color: white !important;
+}
+
+header.green,header.green a,footer.green{
+  --my-text:rgb(20, 184, 166);
+  --bs-btn-hover-color : black;
+  --primary-ems-color:rgb(255, 255, 255);
+  background-color: rgb(20, 184, 166) !important;
+  color: white !important;
+}
+
+header.skyblue,header.skyblue a,footer.skyblue{
+  --my-text:rgb(6, 182, 212);
+  --bs-btn-hover-color : black;
+  --primary-ems-color:rgb(255, 255, 255);
+  background-color: rgb(6, 182, 212) !important;
+  color: white !important;
+}
+
+header.pink,header.pink a,footer.pink{
+  --my-text:rgb(217, 70, 239);
+  --bs-btn-hover-color : black;
+  --primary-ems-color:rgb(255, 255, 255);
+  background-color: rgb(217, 70, 239) !important;
+  color: white !important;
+}
+
+header.dark,header.dark a,footer.dark{
+  --my-text:rgb(10, 10, 10);
+  --bs-btn-hover-color : black;
+  --primary-ems-color:rgb(255, 255, 255);
+  background-color: rgb(52, 58, 64) !important;
+  color: white !important;
+}
+
+header.red,header.red a,footer.red{
+  --my-text:rgb(233, 30, 99);
+  --bs-btn-hover-color : black;
+  --primary-ems-color:rgb(255, 255, 255);
+  background-color: rgb(233, 30, 99) !important;
+  color: white !important;
+}
+
+header.brown,header.brown a,footer.brown{
+  --my-text:rgb(93, 64, 55);
+  --bs-btn-hover-color : black;
+  --primary-ems-color:rgb(255, 255, 255);
+  background-color: rgb(93, 64, 55) !important;
+  color: white !important;
+}
+
+
+/*Sidebar Theme*/
+#offcanvasNavbar.darkblue,#offcanvasNavbar.darkblue a{
+  --primary-ems-color:rgb(255, 255, 255);
+  background-color: rgb(99, 102, 241) !important;
+  color: white !important;
+}
+
+#offcanvasNavbar.lightblue,#offcanvasNavbar.lightblue a{
+  --primary-ems-color:rgb(255, 255, 255);
+  background-color: rgb(59, 130, 246) !important;
+  color: white !important;
+}
+
+#offcanvasNavbar.purple,#offcanvasNavbar.purple a{
+  --primary-ems-color:rgb(255, 255, 255);
+  background-color: rgb(139, 92, 246) !important;
+  color: white !important;
+}
+
+#offcanvasNavbar.green,#offcanvasNavbar.green a{
+  --primary-ems-color:rgb(255, 255, 255);
+  background-color: rgb(20, 184, 166) !important;
+  color: white !important;
+}
+
+#offcanvasNavbar.skyblue,#offcanvasNavbar.skyblue a{
+  --primary-ems-color:rgb(255, 255, 255);
+  background-color: rgb(6, 182, 212) !important;
+  color: white !important;
+}
+
+#offcanvasNavbar.pink,#offcanvasNavbar.pink a{
+  --primary-ems-color:rgb(255, 255, 255);
+  background-color: rgb(217, 70, 239) !important;
+  color: white !important;
+}
+
+#offcanvasNavbar.dark,#offcanvasNavbar.dark a{
+  --primary-ems-color:rgb(255, 255, 255) !important;
+  background-color: rgb(52, 58, 64) !important;
+  color: white !important;
+}
+
+#offcanvasNavbar.red,#offcanvasNavbar.red a{
+  --primary-ems-color:rgb(255, 255, 255);
+  background-color: rgb(233, 30, 99) !important;
+  color: white !important;
+}
+
+#offcanvasNavbar.brown,#offcanvasNavbar.brown a{
+  --primary-ems-color:rgb(255, 255, 255);
+  background-color: rgb(93, 64, 55) !important;
+  color: white !important;
+}
+
+#offcanvasNavbar.orange,#offcanvasNavbar.orange a{
+  --primary-ems-color:rgb(255, 255, 255);
+  background-color: rgb(254, 159, 67) !important;
+  color: white !important;
+}
+
+/*Primary Theme*/
+body.darkblue {
+  --primary-ems-color:rgb(99, 102, 241);
+  --secondary-ems-color:#18aefa;
+  --primary-light-color:rgb(99, 102, 241);
+  --background-theme: rgb(234, 234, 240);
+  --hover-bg : rgba(99, 102, 241, 0.08);
+}
+
+body.lightblue {
+  --primary-ems-color:rgb(59, 130, 246);
+  --secondary-ems-color:#18aefa;
+  --primary-light-color:rgb(59, 130, 246);
+  --background-theme: rgb(229, 235, 243);
+  --hover-bg : rgba(59, 130, 246, 0.08);
+}
+
+body.purple {
+  --primary-ems-color:rgb(139, 92, 246);
+  --secondary-ems-color:#18aefa;
+  --primary-light-color:rgb(139, 92, 246);
+  --background-theme: rgb(234, 230, 241);
+  --hover-bg : rgba(139, 92, 246, 0.08);
+}
+
+body.green {
+  --primary-ems-color:rgb(20, 184, 166);
+  --secondary-ems-color:#18aefa;
+  --primary-light-color:rgb(20, 184, 166);
+  --background-theme: rgb(227, 240, 238);
+  --hover-bg : rgba(20, 184, 166, 0.08);
+}
+
+body.skyblue {
+  --primary-ems-color:rgb(6, 182, 212);
+  --secondary-ems-color:#18aefa;
+  --primary-light-color:rgb(6, 182, 212);
+  --background-theme: rgb(231, 240, 241);
+  --hover-bg : rgba(6, 182, 212, 0.08);
+}
+
+body.pink {
+  --primary-ems-color:rgb(217, 70, 239);
+  --secondary-ems-color:#18aefa;
+  --primary-light-color:rgb(217, 70, 239);
+  --background-theme: rgb(243, 232, 245);
+  --hover-bg : rgba(217, 70, 239, 0.08);
+}
+
+body.dark,#offcanvasNavbar.dark a{
+  --primary-ems-color:rgb(52, 58, 64);
+  --secondary-ems-color:#18aefa;
+  --primary-light-color:rgb(52, 58, 64);
+  --background-theme: rgb(229, 231, 233);
+  --hover-bg : rgba(52, 58, 64, 0.08);
+}
+
+body.red {
+  --primary-ems-color:rgb(233, 30, 99);
+  --secondary-ems-color:#18aefa;
+  --primary-light-color:rgb(233, 30, 99);
+  --background-theme: rgb(243, 225, 231);
+  --hover-bg : rgba(233, 30, 99, 0.08);
+}
+
+body.brown {
+  --primary-ems-color:rgb(93, 64, 55);
+  --secondary-ems-color:#18aefa;
+  --primary-light-color:rgb(93, 64, 55);
+  --background-theme: rgb(233, 229, 228);
+  --hover-bg : rgba(93, 64, 55, 0.08);
+}
+
+body.white,body.white a {
+  --primary-ems-color:rgb(15, 15, 15);
+  --primary-bg-color:rgb(255, 255, 255);
+  --secondary-ems-color:#18aefa;
+  --primary-light-color:rgb(255, 255, 255);
+  --background-theme: rgb(233, 229, 228);
+  --hover-bg : rgba(93, 64, 55, 0.08);
+}
+
+
+.my-white{
+  color: var(--my-text) !important;
+}
+
+.p-component {
+  font-family: var(--font-style) !important;
+}
+
+.back-shadow{
+  box-shadow: var(--back-shadow) !important;
+}
+
+.text-ems-primary{
+  color:var(--primary-ems-color);
+}
+
+.border-ems-primary{
+  border-color: var(--primary-ems-color)!important;
+}
+.bg-ems-primary{
+  background-color:var(--primary-ems-color)!important;
+}
+
+.bg-ems-secondary{
+  background-color:var(--secondary-ems-color)!important;
+}
+
+.text-ems-secondary{
+  color:var(--secondary-ems-color);
+}
+
+.card.bg-comman {
+  background-color: #ffffff00;
+  border: 0!important;
+  border-radius: 15px;
+  box-shadow: 0px 0px 31px rgba(44, 50, 63, 0.02);
+}
+
+.card.card-chart, .card.comman-shadow {
+  background: #FFFFFF;
+  box-shadow: 0px 0px 31px rgba(44, 50, 63, 0.02);
+  border-radius: 15px;
+  border: 0;
+}
+
+@media (min-width: 992px) {
+  .my-container .container-fluid {
+    padding-left: 220px;
+    padding-right: 0px;
+    margin-left: inherit;
+    -webkit-transition: transform 0.3s ease-in-out;
+    -ms-transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
+  }
+}
+.slow-animation{
+  -webkit-transition: transform 0.3s ease-in-out;
+  -ms-transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #d1d1d1;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #d1d1d1;
+  border-radius: 10px;
+}
+
+/*table*/
+.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  background: var(--primary-ems-color)!important;
+  border-color: var(--primary-ems-color)!important;
+}
+
+.p-checkbox .p-checkbox-box.p-highlight {
+  border-color: var(--primary-ems-color)!important;
+  background: var(--primary-ems-color)!important;
+}
+.p-datatable .p-datatable-tbody > tr > td,.p-datatable .p-paginator-bottom {
+  border-width: 0px!important;
+}
+.p-datatable .p-datatable-thead>tr>th{
+  font-weight: 700 !important;
+  background: rgba(0, 0, 0, 0.05) !important;
+  border: none !important;
+  padding: 0.75rem 0.50rem!important;
+  white-space: nowrap!important;
+  border-top: 1px solid #e2e5e8!important;
+
+}
+.p-datatable .p-datatable-tbody>tr>td {
+  padding: 0.75rem 0.50rem!important;
+  white-space: nowrap!important;
+}
+/*from input*/
+.login-danger{
+  color: red;
+}
+
+.p-datatable-scrollable-table>.p-datatable-thead {
+  z-index: 0!important;
+}
+
+
+
+.bootstrap-autocomplete {
+  display: block!important;
+  width: 100%!important;
+  padding: 0.375rem 0.75rem!important;
+  font-size: 1rem!important;
+  line-height: 1.5!important;
+  color: #495057!important;
+  background-color: #fff!important;
+  background-clip: padding-box!important;
+  border: 1px solid #ced4da!important;
+  border-radius: 0.25rem!important;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out!important;
+}
+
+.bootstrap-autocomplete:focus {
+  color: #495057!important;
+  background-color: #fff!important;
+  border-color: #80bdff!important;
+  outline: 0!important;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25)!important;
+}
+
+.bootstrap-autocomplete::-ms-expand {
+  background-color: transparent!important;
+  border: 0!important;
+}
+
+.bootstrap-autocomplete::placeholder {
+  color: #6c757d!important;
+  opacity: 1!important;
+}
+
+.bootstrap-autocomplete:disabled, .form-control[readonly] {
+  background-color: #e9ecef!important;
+  opacity: 1!important;
+}
+
+/*table color*/
+.actions a {
+  width: 32px;
+  height: 32px;
+}
+
+.bg-success-light {
+  background-color: #F7F7FA !important;
+  border-radius: 50px;
+  color: var(--primary-ems-color) !important;
+}
+
+.custome-size{
+  width:100% !important;
+  min-height: 100% !important;
+}
+
+
+@media (min-width:992px) {
+  .custome-size{
+    width:50vw !important;
+    min-height: 80% !important;
+  }
+}
+
+.p-datatable-thead{
+  box-shadow: 0 1px 1px rgba(0,0,0,.102);
+  background-color: transparent !important;
+  border-radius: 8px;
+}
+
+/* table head */
+.p-datatable .p-datatable-thead > tr:first-child th:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+.p-datatable .p-datatable-thead > tr:first-child th:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.p-datatable .p-datatable-thead tr th{
+  background-color: white !important;
+}
+
+/* table body style*/
+
+.p-datatable .p-datatable-tbody>tr.spacer{
+  background: transparent !important;
+}
+.p-datatable .p-datatable-tbody>tr.spacer >td {
+  padding: 0.2rem !important;
+  background-color: transparent !important;
+}
+
+.p-datatable-tbody tr.data{
+  box-shadow: 0 1px 1px rgba(0,0,0,.102);
+  background-color: transparent !important;
+  border-radius: 8px;
+}
+
+.p-datatable-tbody tr.data td{
+  background-color: white;
+}
+
+.p-datatable-tbody > tr:nth-child(even) > td:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.p-datatable-tbody > tr:nth-child(even) > td:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.p-paginator, .p-datatable-wrapper{
+  border-radius: 8px !important;
+}
+
+.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  color: #f7fbff !important;
+}

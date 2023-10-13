@@ -1,0 +1,113 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12 d-flex justify-content-between fs-xs flex-wrap">
+      <h5>Purchase</h5>
+      <h5>Billing / Purchase</h5>
+    </div>
+
+    <div class="px-1">
+      <div class="col-md-12 p-1 px-md-3">
+        <div class="card shadow-none bg-comman flex-fill p-1">
+          <div class="card-header p-3 d-flex align-items-center justify-content-between border-bottom-0 bg-white rounded fs-xs flex-wrap">
+            <h5 class="card-title mb-1 mb-md-0">Items List</h5>
+            <div class="d-flex justify-content-start justify-content-lg-between align-items-center gap-1">
+              <button class="btn btn-sm xls-bg " (click)="downloadxlx(Tablebodydatas(),'Purchase')" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Download Excel">
+                <i class="fa-solid fa-file-excel fa-lg"></i>
+              </button>
+
+              <button role="button" class="btn btn-sm btn-primary bg-ems-primary border-ems-primary" (click)="openNew()"><i class="fas fa-plus"></i></button>
+               <!--<button role="button" class="btn btn-sm btn-primary bg-ems-primary border-ems-primary" (click)="invoiceprint=true"><i class="fa-solid fa-upload"></i></button>
+              <input type="file" (change)="handleFile($event)" accept=".xlsx" class="form-control">-->
+              <div class="input-group">
+                <span class="input-group-text p-0 border-0" id="basic-addon1"><button class="btn btn-sm rounded-start btn-primary z-0 border border-end-0 rounded-0 bg-ems-primary border-ems-primary" icon="pi pi-filter-slash" (click)="clear(dt)">Clear</button></span>
+                <input #inputd type="text" class="form-control shadow-none p-0" [(ngModel)]="searchQuery" name="searchQuery" (input)="onSearchInputChange()" placeholder="  Search items" />
+              </div>
+            </div>
+          </div>
+          <div class="card-body p-0 mt-2">
+            <div class="table-responsive card-table" [style.height]="height">
+              <p-table #dt [columns]="Tablecolumns" [lazy]="true" [value]="Tablebodydatas()" dataKey="id" styleClass="p-datatable-sm  p-datatable-gridlines"
+                [paginator]="true" [rows]="10" [totalRecords]="totalRecords()" [rowsPerPageOptions]="[10, 25, 50]" [scrollable]="true" [responsive]="true" scrollHeight="flex"
+                [loading]="loading" [virtualRowHeight]="11" [paginator]="true" [reorderableColumns]="true" (onLazyLoad)="onPageChange($event)" [showCurrentPageReport]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th>Action</th>
+                    <th pSortableColumn="{{ col.header }}" *ngFor="let col of Tablecolumns">{{ col.header }}</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-i="index">
+                  <tr class="spacer">
+                    <td></td>
+                  </tr>
+                  <tr class="data">
+                    <td>
+                      <div class="actions">
+                        <!--
+                        <a class="btn btn-sm bg-danger-light rounded-circle" (click)="edititems(rowData)"> <i class="fa-regular fa-pen-to-square"></i> </a>
+                        -->
+                        <a class="btn btn-sm bg-danger-light rounded-circle" (click)="deleteitems(rowData)"> <i class="fa-solid fa-trash-can text-danger"></i> </a>
+                      </div>
+                    </td>
+
+                    <td *ngFor="let col of Tablecolumns" [ngSwitch]="true">
+                      <span *ngSwitchCase="col.formattype==='image'">
+                        <img src="{{rowData['Product_Img']}}" alt="" width="100" class="shadow-4 rounded">
+                      </span>
+                      <span *ngSwitchCase="col.formattype==='date'">
+                        {{ rowData[col.field] | date: 'dd/MM/yyyy'}}
+                      </span>
+                      <span *ngSwitchDefault> {{ rowData[col.field]}} </span>
+                    </td>
+
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </div>
+        </div>
+
+        <!--form datat-->
+        <p-dialog [modal]="true" header="{{formdynamicconfig.title}}" [(visible)]="productDialog" styleClass="bg-comman border-primary">
+          <form class="row needs-validation bg-white" #savenewproductform="ngForm" (ngSubmit)="this[dyfunform](savenewproductform,tempfile,formdata.id)" ngNativeValidate>
+            <div *ngFor="let grid of formconfig.grid" class="col-md-{{grid['colsize']}} mb-4">
+              <div *ngFor="let cd of formconfig.fields;let i=index">
+                <div class="p-fluid mb-3" *ngIf="grid.colname==cd.colname">
+                  <label>{{cd.label}} <span class="login-danger">*</span></label>
+
+                  <!--Suggestion -->
+                  <p-autoComplete *ngIf="cd.elementtype=='autoComplete'" [field]="autocomplete_Field==[cd.name]?autocomplete_Field: null" [(ngModel)]="formdata[cd.name]" name="{{cd.name}}" [forceSelection]="true" name="{{cd.name}}" [suggestions]="suggestions" (completeMethod)="search($event,cd.name)" >
+                    <ng-template let-data pTemplate="item">
+                      <div class="flex align-items-center gap-2" (click)="loaddata(data,cd.name)" (keydown)="handleKeyboardEvent($event)">
+                        <div>{{ data[cd.name] }}</div>
+                      </div>
+                    </ng-template>
+                  </p-autoComplete>
+
+                  <!--Input-->
+                  <input class="form-control py-2" type="{{cd.type}}" [(ngModel)]="formdata[cd.name]" name="{{cd.name}}" required *ngIf="cd.elementtype=='input'">
+
+                  <!--Select-->
+                  <select class="form-select py-2" id="validationCustom04" required *ngIf="cd.elementtype=='dropdown'" [(ngModel)]="formdata[cd.name]" name="{{cd.name}}">
+                    <option selected disabled>...</option>
+                    <option *ngFor="let value of cd.value">{{value}}</option>
+                  </select>
+
+                  <!--Date-->
+                  <p-calendar *ngIf="cd.elementtype=='date'" [ngModel]="formdata[cd.name] | date: 'MM/dd/yyyy'" name="{{cd.name}}" appendTo="body" [showButtonBar]="true" [showIcon]="true"></p-calendar>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <button class="btn btn-primary bg-ems-primary border-ems-primary py-sm-2 px-sm5 me-2" type="submit">{{formdynamicconfig.buttonlabel}}</button>
+            </div>
+          </form>
+        </p-dialog>
+
+        <p-toast></p-toast>
+        <p-confirmDialog></p-confirmDialog>
+      </div>
+    </div>
+  </div>
+</div>

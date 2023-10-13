@@ -1,0 +1,61 @@
+<p-toast></p-toast>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <h5>Product License</h5>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card border-0">
+        <div class="card-body">
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <h5><i class="fa-brands fa-keycdn"></i> Current License</h5>
+              <div class="mx-5 my-3">
+                <h6>License Status : {{license?license.Product_Status:''}}</h6>
+                <h6 *ngIf="license&&license.Product_Status == 'Trial'">Trial Expried in : {{trialexprie}} days</h6>
+                <h6 *ngIf="license&&license.Product_Status != 'Trial'">Expried On : {{license?(license.Expiry_Date| date: 'dd-MM-yyyy') :''}}</h6>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <h5><i class="fa-solid fa-file-shield"></i> Activate License</h5>
+              <div class="mx-5 my-3">
+                <h6>License Key</h6>
+                <form #userdatas="ngForm" (ngSubmit)="Activatekey(userdatas)" ngNativeValidate>
+                  <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="XXXX XXXX XXXX XXXX" minlength="16" ngModel #Product_Key="ngModel" name="Product_Key" required>
+                    <span class="input-group-text p-0" ><button class="btn border-0" type="submit">Activate</button></span>
+                  </div>
+                </form>
+
+                <div *ngIf="activate&&activate.msg == 'License Activated Successfully'">Notes : Your successfully Activated your license. Kindly Resignin for Get Full Access</div>
+              </div>
+              <div *ngIf="TokenService.getUserDetails().data.Role == 'Admin'">
+                <h5><i class="fa-solid fa-file-shield"></i> Generate License Key</h5>
+              <div class="mx-5 my-3">
+                <h6>Email</h6>
+                <form #generatekey="ngForm" (ngSubmit)="Generatekey(generatekey)" ngNativeValidate>
+                  <div class="input-group mb-3">
+                    <input type="email" class="form-control" placeholder="Enter User Email" ngModel #Email="ngModel" name="Email" required>
+                    <span class="input-group-text p-0" ><button class="btn border-0" type="submit">Generate Key</button></span>
+                  </div>
+                </form>
+                <div *ngIf="productkey">Your Key : {{productkey}}</div>
+              </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

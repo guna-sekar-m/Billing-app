@@ -1,0 +1,32 @@
+.ems-login .card {
+
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+}
+
+.ems-login{
+  background: linear-gradient(-135deg,#c850c0,#4158d0);
+}
+
+.ems-login .card .bg-ems-secondary {
+  border-radius: 8px 20px 20px 8px;
+}
+
+.ems-login .ems-login-form .form-group label {
+  font-size: 13px;
+  color: #ABABAB;
+  font-weight: 500;
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  background: #ffffff;
+  margin-bottom: 0;
+  padding: 0px 5px;
+}
+
+.ems-login .profile-views {
+  position: absolute;
+  right: 17px;
+  top: 50%;
+  transform: translateY(-50%);
+}

@@ -1,0 +1,299 @@
+<section>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <h5>Welcome Admin!</h5>
+      </div>
+    </div>
+    <!--Total Salse Report-->
+    <div class="row">
+      <div class="col-xl-3 col-sm-6 col-12 d-flex">
+        <div class="card bg-comman bg-white w-100 mb-3 back-shadow">
+          <div class="card-body">
+            <div class="db-widgets d-flex justify-content-between align-items-center">
+              <div class="db-info">
+                <h6 class="text-dark">Total Purchase</h6>
+                <h3 class="text-dark">₹ {{dashbord_Count&&dashbord_Count['Total_Purchese_Price']?dashbord_Count['Total_Purchese_Price']:0}}</h3>
+              </div>
+              <div class="db-icon card1">
+                <i class="fa-solid fa-bag-shopping fa-lg"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 col-12 d-flex">
+        <div class="card bg-comman bg-white w-100 mb-3 back-shadow">
+          <div class="card-body">
+            <div class="db-widgets d-flex justify-content-between align-items-center">
+              <div class="db-info">
+                <h6 class="text-dark">Total Sale Amount</h6>
+                <h3 class="text-dark">₹ {{dashbord_Count&&dashbord_Count['Total_Amount']?dashbord_Count['Total_Amount']:0}}</h3>
+              </div>
+              <div class="db-icon card2">
+                <i class="fa-regular fa-money-bill-1 fa-lg"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 col-12 d-flex">
+        <div class="card bg-comman bg-white w-100 mb-3 back-shadow">
+          <div class="card-body">
+            <div class="db-widgets d-flex justify-content-between align-items-center">
+              <div class="db-info">
+                <h6 class="text-dark">Total Paid Amount</h6>
+                <h3 class="text-dark">₹ {{dashbord_Count&&dashbord_Count['Total_Amount_Paid']?dashbord_Count['Total_Amount_Paid']:0}}</h3>
+              </div>
+              <div class="db-icon card4">
+                <i class="fa-solid fa-money-bill-transfer"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 col-12 d-flex">
+        <div class="card bg-comman bg-white w-100 mb-3 back-shadow">
+          <div class="card-body">
+            <div class="db-widgets d-flex justify-content-between align-items-center">
+              <div class="db-info">
+                <h6 class="text-dark">Total Payment Due</h6>
+                <h3 class="text-dark">₹ {{dashbord_Count&&dashbord_Count['Total_Amount_Unpaid']?dashbord_Count['Total_Amount_Unpaid']:0}}</h3>
+              </div>
+              <div class="db-icon card3">
+                <i class="fa-solid fa-sack-xmark"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!--Total Stack Report-->
+    <div class="row">
+      <div class="col-xl-3 col-sm-6 col-12 d-flex">
+        <div class="card bg-comman card1 w-100 mb-3 back-shadow">
+          <div class="card-body">
+            <div class="db-widgets d-flex justify-content-between align-items-center">
+              <div class="db-info">
+                <h6>Total Invoices</h6>
+                <h3>{{dashbord_Count&&dashbord_Count['Invoicecount']?dashbord_Count['Invoicecount']:0}}</h3>
+              </div>
+              <div class="db-icon" role="button" (click)="getinvoicedt({data:'all'})">
+                <i class="fa-solid fa-cash-register fa-lg"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 col-12 d-flex">
+        <div class="card bg-comman card2 w-100 mb-3 back-shadow">
+          <div class="card-body">
+            <div class="db-widgets d-flex justify-content-between align-items-center">
+              <div class="db-info">
+                <h6>Paid Invoices</h6>
+                <h3>{{dashbord_Count&&dashbord_Count['Paid_Status_Paid']?dashbord_Count['Paid_Status_Paid']:0}}</h3>
+              </div>
+              <div class="db-icon" role="button" (click)="getinvoicedt({data:'Paid'})">
+                <i class="fa-solid fa-file-circle-check"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 col-12 d-flex">
+        <div class="card bg-comman card4 w-100 mb-3 back-shadow">
+          <div class="card-body">
+            <div class="db-widgets d-flex justify-content-between align-items-center">
+              <div class="db-info">
+                <h6>Unpaid Invoices</h6>
+                <h3>{{dashbord_Count&&dashbord_Count['Paid_Status_Unpaid']?dashbord_Count['Paid_Status_Unpaid']:0}}</h3>
+              </div>
+              <div class="db-icon" role="button" (click)="getinvoicedt({data:'Unpaid'})">
+                <i class="fa-solid fa-file-powerpoint"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 col-12 d-flex">
+        <div class="card bg-comman card3 w-100 mb-3 back-shadow">
+          <div class="card-body">
+            <div class="db-widgets d-flex justify-content-between align-items-center">
+              <div class="db-info">
+                <h6>Cancelled Invoices</h6>
+                <h3>{{dashbord_Count&&dashbord_Count['Paid_Status_Cancelled']?dashbord_Count['Paid_Status_Cancelled']:0}}</h3>
+              </div>
+              <div class="db-icon" role="button" (click)="getinvoicedt({data:'Cancelled'})">
+                <i class="fa-solid fa-file-circle-xmark"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <!--Chart Report-->
+      <div class="col-md-6 mb-3">
+        <div class="card border-0 h-100 back-shadow">
+          <div class="card-header border-light-subtle d-flex align-items-center justify-content-between">
+            <h6>Purchase Vs Sales</h6>
+            <form (ngSubmit)="getchartbydate(form)" #form="ngForm">
+              <div class="d-flex">
+                <p-dropdown class="chart-select me-2" #select [options]="dropdown" [(ngModel)]="selectedCharttype" name="selectedCharttype" (onChange)="changecharttype(select)" ></p-dropdown>
+
+                <p-calendar *ngIf="select.value  == 'Select Month'" class="chart-filter" [(ngModel)]="selecteMonth" name="selecteMonth" view="month" dateFormat="mm/yy" selectionMode="range" [showIcon]="true">
+                  <ng-template pTemplate="footer" >
+                    <div class="m-2 text-center">
+                      <button type="submit" class="btn btn-sm bg-ems-primary text-white">Filter</button>
+                    </div>
+                  </ng-template>
+                </p-calendar>
+              </div>
+            </form>
+
+          </div>
+          <div class="p-2">
+            <canvas id="acquisitions" height="120"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!--Best Saling Products Report-->
+      <div class="col-md-6 mb-3">
+        <div class="card border-0 h-100 back-shadow">
+          <div class="card-header border-0 d-flex align-items-center justify-content-between">
+            <h6 class="my-2">Recently Top Selling Products</h6>
+          </div>
+            <p-table class="mx-2" [value]="topsaleproducts" selectionMode="single" >
+              <ng-template pTemplate="header">
+                <tr class="border-bottom">
+                  <th class="text-center">S.No.</th>
+                  <th pSortableColumn="Item_Name">Product Name <p-sortIcon field="Item_Name"></p-sortIcon></th>
+                  <th pSortableColumn="Price">Price <p-sortIcon field="Price"></p-sortIcon></th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-product let-i="rowIndex">
+                <tr [ngClass]="i != 4 ?'border-bottom':'' " [pSelectableRow]="product">
+                  <td class="text-center">{{i+1}}</td>
+                  <td>{{ product.Item_Name }}</td>
+                  <td>{{ product.Price }}</td>
+                </tr>
+              </ng-template>
+            </p-table>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <div class="card h-100 border-0 back-shadow">
+          <div class="card-header border-0 d-flex justify-content-between">
+            <h6 class="my-2">Unsold Products</h6>
+            <button class="btn btn-sm card4 bg-white" (click)="downloadxlx(notsoldproduct,'Unsold Products')" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Download Excel">
+              <i class="fa-solid fa-file-excel fa-lg"></i>
+            </button>
+          </div>
+          <div class="card-body pt-0">
+            <p-table [value]="notsoldproduct" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10, 25, 50]">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th class="text-center">S.No.</th>
+                  <th class="text-center" pSortableColumn="Item_Code" [style.min-width]="'80px'"><span class="text-wrap text-break">Item Code</span> <p-sortIcon field="Item_Code"></p-sortIcon></th>
+                  <th pSortableColumn="Item_Name" [style.min-width]="'180px'">Item Name <p-sortIcon field="Item_Name"></p-sortIcon></th>
+                  <th pSortableColumn="Brand_Name" [style.min-width]="'80px'"><span class="text-wrap text-break">Brand Name</span>  <p-sortIcon field="Brand_Name"></p-sortIcon></th>
+                  <th pSortableColumn="Item_Stock" [style.min-width]="'80px'">Quantity <p-sortIcon field="Item_Stock"></p-sortIcon></th>
+                 <!-- <th pSortableColumn="Item_Category" [style.min-width]="'80px'">Category <p-sortIcon field="Item_Category"></p-sortIcon></th>-->
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-product let-i="rowIndex">
+                <tr>
+                  <td class="text-center">{{i+1}}</td>
+                  <td class="text-center text-wrap text-break" [style.max-width]="'250px'">{{product.Item_Code}}</td>
+                  <td>{{product.Item_Name}}</td>
+                  <td>{{product.Brand_Name}}</td>
+                  <td><span class="badge" [ngClass]="product.Item_Stock > 100?'bg-danger':'bg-primary'" >{{product.Item_Stock}}</span></td>
+                 <!-- <td>{{product.Item_Category}}</td>-->
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <div class="card h-100 border-0 back-shadow">
+          <div class="card-header border-0 d-flex justify-content-between">
+            <h6 class="my-2">Out Of Stock Products</h6>
+            <button class="btn btn-sm card4 bg-white" (click)="downloadxlx(outofstockproduct,'Out Of Stock Products')" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Download Excel">
+              <i class="fa-solid fa-file-excel fa-lg"></i>
+            </button>
+          </div>
+          <div class="card-body pt-0">
+            <p-table [value]="outofstockproduct" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10, 25, 50]">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th class="text-center">S.No.</th>
+                  <th class="text-center" pSortableColumn="Item_Code" [style.min-width]="'80px'"><span class="text-wrap text-break">Item Code</span> <p-sortIcon field="Item_Code"></p-sortIcon></th>
+                  <th pSortableColumn="Item_Name" [style.min-width]="'180px'">Item Name <p-sortIcon field="Item_Name"></p-sortIcon></th>
+                  <th pSortableColumn="Brand_Name" [style.min-width]="'80px'"><span class="text-wrap text-break">Brand Name</span>  <p-sortIcon field="Brand_Name"></p-sortIcon></th>
+                  <!-- <th pSortableColumn="Item_Stock" [style.min-width]="'80px'">Quantity <p-sortIcon field="Item_Stock"></p-sortIcon></th> -->
+                  <th pSortableColumn="Stock_Status" [style.min-width]="'80px'">Stock Status <p-sortIcon field="Stock_Status"></p-sortIcon></th>
+                  <!-- <th pSortableColumn="Item_Category" [style.min-width]="'80px'">Category <p-sortIcon field="Item_Category"></p-sortIcon></th>-->
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-product let-i="rowIndex">
+                <tr>
+                  <td class="text-center">{{i+1}}</td>
+                  <td class="text-center text-wrap text-break" [style.max-width]="'250px'">{{product.Item_Code}}</td>
+                  <td>{{product.Item_Name}}</td>
+                  <td>{{product.Brand_Name}}</td>
+                  <!-- <td>{{product.Item_Stock}}</td> -->
+                  <td>
+                    <span class="badge" [ngClass]="product.Stock_Status == 'Out Of Stock'?'bg-danger':'bg-warning'">{{product.Stock_Status}}</span>
+                  </td>
+                 <!-- <td>{{product.Item_Category}}</td>-->
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<p-dialog [header]="title" [(visible)]="visible" [modal]="true" [draggable]="false" [resizable]="true" [maximizable]="true" [style]="{width: width}" >
+  <p-table [value]="invoicedata" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10, 25, 50]">
+    <ng-template pTemplate="header">
+      <tr>
+        <th class="text-center">S.No.</th>
+        <th pSortableColumn="Invoice_ID" [style.min-width]="'80px'">Invoice ID <p-sortIcon field="Invoice_ID"></p-sortIcon></th>
+        <th pSortableColumn="Customer_Name" [style.min-width]="'200px'"><span class="text-wrap text-break">Customer Name</span>  <p-sortIcon field="Customer_Name"></p-sortIcon></th>
+        <th pSortableColumn="Customer_Mobilenumber" [style.min-width]="'180px'">Customer Mobile <p-sortIcon field="Customer_Mobilenumber"></p-sortIcon></th>
+        <th pSortableColumn="Invoice_Date" [style.min-width]="'80px'">Invoice Date <p-sortIcon field="Invoice_Date"></p-sortIcon></th>
+        <th pSortableColumn="Total_Amount" [style.min-width]="'80px'">Total Amount <p-sortIcon field="Total_Amount"></p-sortIcon></th>
+        <th pSortableColumn="Paid_Status" [style.min-width]="'80px'">Paid Status <p-sortIcon field="Paid_Status"></p-sortIcon></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product let-i="rowIndex">
+      <tr>
+        <td class="text-center">{{i+1}}</td>
+        <td>{{product.Invoice_ID}}</td>
+        <td>{{product.Customer_Name}}</td>
+        <td>{{product.Customer_Mobilenumber}}</td>
+        <td>{{product.Invoice_Date | date:'dd/MM/yyy'}}</td>
+        <td>{{product.Total_Amount}}</td>
+        <td>{{product.Paid_Status}}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-dialog>

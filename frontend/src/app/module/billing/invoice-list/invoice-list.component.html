@@ -1,0 +1,118 @@
+<section>
+  <div class="container-fluid">
+    <div class="row ">
+      <div class="col-md-12 d-flex justify-content-between fs-xs flex-wrap my-1">
+        <h5 class="mb-0">Invoices</h5>
+        <h5 class="mb-0">Billing / Invoices</h5>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 p-3 px-md-3">
+        <div class="card shadow-none bg-comman flex-fill p-1">
+          <div class="card-header d-flex align-items-center justify-content-between border-bottom-0 bg-white rounded fs-xs flex-wrap">
+            <h5 class="card-title mb-2 mb-md-0">Invoices List</h5>
+            <div class="input-group">
+              <span class="input-group-text p-0 z-0" id="basic-addon1">
+                <button class="btn btn-sm rounded-start btn-primary bg-ems-primary border-ems-primary rounded-0" icon="pi pi-filter-slash" (click)="clear(dt)">Clear</button>
+              </span>
+              <input #inputd type="text" class="form-control p-0" [(ngModel)]="searchQuery" name="searchQuery" (input)="onSearchInputChange()" placeholder="  Search Invoice" />
+            </div>
+          </div>
+          <div class="card-body px-1 pb-0">
+            <div class="table-responsive card-table" [style.height]="height">
+              <p-table #dt [columns]="Tablecolumns" [lazy]="true" [value]="Tablebodydatas()" dataKey="_id" styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines"
+                [rows]="10" [totalRecords]="totalRecords()" [rowsPerPageOptions]="[10, 25, 50]" [scrollable]="true" [responsive]="true" scrollHeight="flex" [loading]="loading"
+                [virtualRowHeight]="11" [paginator]="true" [reorderableColumns]="true" (onLazyLoad)="onPageChange($event)" [showCurrentPageReport]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <!--
+                    <th style="width: 4rem">
+                      <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    </th> -->
+                    <th>Action</th>
+                    <th pSortableColumn="{{ col.header }}" *ngFor="let col of Tablecolumns">{{ col.header }}</th>
+
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData>
+                  <tr class="spacer">
+                    <td></td>
+                  </tr>
+                  <tr class="data">
+                   <!-- <td>
+                      <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+                    </td>-->
+                    <td>
+                      <div class="actions d-flex">
+                        <a class="btn btn-sm bg-danger-light rounded-circle text-primary" [routerLink]="['/billing/app/edit-invoice',rowData.Invoice_ID]">
+                          <i class="fa-regular fa-pen-to-square"></i>
+                        </a>
+
+                        <div class="dropdown">
+                          <button class="btn btn-sm text-info" type="button" type="button" data-bs-toggle="dropdown" aria-expanded="false" ><i class="fa-solid fa-file-invoice"></i></button>
+                          <ul class="dropdown-menu">
+                            <li><a class="dropdown-item w-100" role="button" (click)="printpdf(rowData.Invoice_ID,'a4')">A4</a></li>
+                            <li><a class="dropdown-item w-100" role="button" (click)="printpdf(rowData.Invoice_ID,'mini')">Thermal</a></li>
+                          </ul>
+                        </div>
+
+                      </div>
+                    </td>
+                    <td *ngFor="let col of Tablecolumns" [ngSwitch]="true">
+                      <span *ngSwitchCase="col.formattype==='image'">
+                        <img src="{{rowData['Product_Img']}}" alt="" width="100" class="shadow-4 rounded">
+                      </span>
+                      <span *ngSwitchCase="col.formattype==='date'">
+                        {{ rowData[col.field] | date: 'dd/MM/yyyy'}}
+                      </span>
+                      <span *ngSwitchDefault>
+                        {{ rowData[col.field]}}
+                      </span>
+                    </td>
+
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </div>
+        </div>
+
+        <!--form datat-->
+        <p-dialog header="{{formdynamicconfig.title}}" [(visible)]="productDialog" styleClass="bg-comman border-primary">
+          <form class="row needs-validation bg-white" #savenewproductform="ngForm" (ngSubmit)="this[dyfunform](savenewproductform,tempfile,formdata._id)" ngNativeValidate>
+            <div *ngFor="let grid of formconfig.grid" class="col-md-{{grid['colsize']}} mb-4">
+              <div *ngFor="let cd of formconfig.fields;let i=index">
+                <div class="p-fluid mb-3" *ngIf="grid.colname==cd.colname">
+                  <label>{{cd.label}} <span class="login-danger">*</span></label>
+                  <input class="form-control py-2" type="{{cd.type}}" [(ngModel)]="formdata[cd.name]" name="{{cd.name}}" required *ngIf="cd.elementtype=='input'">
+                  <select class="form-select py-2" id="validationCustom04" required *ngIf="cd.elementtype=='dropdown'" [(ngModel)]="formdata[cd.name]" name="{{cd.name}}">
+                    <option selected disabled>...</option>
+                    <option *ngFor="let value of cd.value">{{value}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <button class="btn btn-primary bg-ems-primary border-ems-primary py-sm-2 px-sm5 me-2" type="submit">{{formdynamicconfig.buttonlabel}}</button>
+            </div>
+          </form>
+        </p-dialog>
+      </div>
+    </div>
+  </div>
+</section>
+
+<p-dialog [modal]="true" header="Invoice" [(visible)]="invoiceprint" [maximizable]="true" styleClass="bg-comman border-primary custome-size">
+  <span [innerHTML]="printdata|safehtml"></span>
+  <p-footer>
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-primary" type="button" (click)="this[printfun](printdata)"><i class="fa-solid fa-print"></i> Print </button>
+      <button class="btn btn-primary" type="button" (click)="this[downloadfun](printdata)"><i class="fa-solid fa-download"></i> Download </button>
+      <button class="btn btn-primary" (click)="invoiceprint=false">Cancel</button>
+    </div>
+  </p-footer>
+</p-dialog>
+
+<p-toast></p-toast>
+<p-confirmDialog></p-confirmDialog>

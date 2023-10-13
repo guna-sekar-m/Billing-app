@@ -1,0 +1,177 @@
+.bg-comman .db-icon {
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
+
+.db-icon {
+  font-size: 25px;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  justify-content: center;
+  -webkit-justify-content: center;
+}
+
+.db-info h6 {
+  margin: 0px;
+  font-weight: 400;
+  font-size: 14px;
+  color: #ffffff;
+  margin-bottom: 5px;
+}
+
+.db-info h3 {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.card1 {
+  background-color: #FE9F43;
+  border: 1px solid #FE9F43;
+}
+.card1 svg{
+  color:#FE9F43 !important
+}
+
+.card2 {
+  background-color: #00CFE8;
+  border: 1px solid #00CFE8;
+}
+
+.card2 .fa-user-tie {
+  color: #1D9BF0;
+}
+
+.card2 svg{
+  color:#00CFE8 !important
+}
+
+.card3 {
+  background-color: #1B2850C4;
+  border: 1px solid #1B2850C4;
+}
+
+.card3 svg {
+  color: #1B2850C4;
+}
+
+.card4 {
+  background-color: #28C76F;
+  border: 1px solid #28C76F;
+}
+
+.card4 svg {
+  color: #28C76F;
+}
+
+.award-boxs {
+  background: #EDF4FF;
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  margin-right: 12px;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  justify-content: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+}
+
+.activity-awards {
+  margin-bottom: 38px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.award-time-list span {
+  background: #FFF9ED;
+  color: #808191;
+  font-weight: 400;
+  font-size: 11px;
+  padding: 5px 9px;
+  border-radius: 6px;
+}
+
+.award-list-outs h4 {
+  color: #2C323F;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.award-list-outs h5 {
+  color: #808191;
+  font-weight: 400;
+  font-size: 12px;
+  margin-bottom: 0;
+}
+
+@media (max-width: 1399px) {
+  .award-list-outs {
+    max-width: 300px;
+  }
+}
+
+.award-time-list {
+  margin-left: auto;
+}
+
+/*table*/
+.actions a {
+  width: 32px;
+  height: 32px;
+
+}
+
+.bg-danger-light {
+  background-color: #F7F7FA !important;
+  color: var(--primary-ems-color) !important;
+  border-radius: 50px;
+}
+
+.bg-success-light {
+  background-color: #F7F7FA !important;
+  border-radius: 50px;
+  color: var(--primary-ems-color) !important;
+}
+
+
+::ng-deep .chart-filter .p-inputtext{
+  padding: 2px 4px !important;
+}
+
+::ng-deep .chart-filter .p-button.p-button-icon-only {
+  padding: 0.2rem 0 ;
+}
+
+::ng-deep .chart-select .p-inputtext {
+  padding: 0.2rem 0.75rem;
+}
+
+::ng-deep .p-datatable .p-datatable-tbody > tr.p-highlight {
+  background: var(--primary-light-color) ;
+  color: #ffffff;
+}
+
+::ng-deep .p-datatable .p-datatable-tbody > tr:focus {
+  outline: 0.15rem solid var(--primary-ems-color);
+  outline-offset: 0.15rem;
+}
+
+::ng-deep .p-sortable-column-icon.p-icon {
+  width: 0.8rem;
+  height: 1rem;
+}
+
+

@@ -1,0 +1,50 @@
+<header class="sticky-top bg-white header nav-shadow" [ngClass]="this.headertheme?this.headertheme.header_theme:''">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+
+      <a class="navbar-brand me-lg-0" [routerLink]="['/billing/app/invoice-dashboard']"><img *ngIf="headertheme&&headertheme.logo" [src]="api+(headertheme?headertheme.logo:'')" class="" width="85px" alt=""> <span class="fw-flod text-truncate" *ngIf="headertheme&&!headertheme.logo"> {{headertheme?headertheme.Organization_Name:''}}</span></a>
+      <button (click)="resizebody()" class="btn btn-sm rounded-circle bg-ems-primary border-ems-primary mx-lg-5 my-white back-shadow" type="button">
+       <span *ngIf="sidebar"><i  class="fa-solid fa-fade fa-angles-left"></i></span>
+       <span *ngIf="!sidebar"> <i class="fa-solid fa-fade fa-angles-right"></i></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+        <form class="d-flex ms-lg-5" role="search">
+          <span class="input-group-text border-end-0 rounded-end-0 bg-white" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
+            <input class="form-control border-start-0  rounded-start-0" type="search" placeholder="Search" aria-label="Search">
+
+        </form>
+        <ul class="navbar-nav mb-2 mb-lg-0 gap-3">
+
+          <li class="nav-item dropdown">
+            <a class="btn my-white bg-ems-primary border-ems-primary w-100 back-shadow " role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-plus"></i> New Invoice
+            </a>
+            <ul class="dropdown-menu  dropdown-menu-end">
+              <li><a class="dropdown-item" [routerLink]="['/billing/app/add-invoice']" role="button" >Ordinary Invoice</a></li>
+              <li><a class="dropdown-item" [routerLink]="['/billing/app/instant-invoice']" role="button" >Instant Invoice</a></li>
+            </ul>
+          </li>
+
+          <li class="d-none">
+            <button class="btn my-white bg-ems-primary border-ems-primary w-100 back-shadow" [routerLink]="['/billing/app/add-invoice']" [target]="'_blank'"><i class="fas fa-plus"></i> New Invoice</button>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link header-nav-list" role="button" (click)="toggleFullScreen()" ><i class="fa-solid fa-expand"></i></a>
+          </li>
+          <li class="nav-item d-none">
+            <a class="nav-link header-nav-list" role="button" ><i class="fa-regular fa-bell"></i></a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa-regular fa-user fa-lg"></i> {{TokenService.getUserDetails().data.Name}}
+            </a>
+            <ul class="dropdown-menu  dropdown-menu-end">
+              <li><button class="dropdown-item" role="button" (click)="logout()">Sign out</button></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,133 @@
+<section>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 d-flex justify-content-between fs-xs flex-wrap">
+        <h5>Items</h5>
+        <h5>Billing / Items</h5>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 p-1 px-md-3">
+        <div class="card shadow-none bg-comman flex-fill p-1">
+          <div class="card-header p-3 d-flex align-items-center justify-content-between border-bottom-0 bg-white rounded fs-xs flex-wrap">
+            <h5 class="card-title mb-1 mb-md-0">Items List</h5>
+            <div class="d-flex justify-content-start justify-content-lg-between align-items-center gap-1">
+              <button class="btn btn-sm xls-bg" (click)="downloadxlx('Stocks')" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Download Excel">
+                <i class="fa-solid fa-file-excel fa-lg"></i>
+              </button>
+              <button role="button" class="btn btn-sm btn-primary bg-ems-primary border-ems-primary" (click)="openNew()"><i class="fas fa-plus"></i></button>
+              <button role="button" class="btn btn-sm btn-primary bg-ems-primary border-ems-primary" (click)="invoiceprint=true"><i class="fa-solid fa-upload"></i></button>
+              <!-- <input type="file" (change)="handleFile($event)" accept=".xlsx" class="form-control">-->
+
+              <div class="input-group">
+                <span class="input-group-text p-0 border-0" id="basic-addon1"><button class="btn btn-sm rounded-start btn-primary z-0 border border-end-0 rounded-0 bg-ems-primary border-ems-primary" icon="pi pi-filter-slash" (click)="clear(dt)">Clear</button></span>
+                <input #inputd type="text" class="form-control shadow-none px-1 py-0" [(ngModel)]="searchQuery" name="searchQuery" (input)="onSearchInputChange()" placeholder="  Search items" />
+              </div>
+            </div>
+          </div>
+          <div class="card-body p-0 mt-2">
+            <div class="table-responsive card-table" [style.height]="height">
+              <p-table #dt [columns]="Tablecolumns" [lazy]="true" [value]="Tablebodydatas()" dataKey="id" styleClass="p-datatable-sm  p-datatable-gridlines"
+                [rows]="10" [totalRecords]="totalRecords()" [rowsPerPageOptions]="[10, 25, 50]" [scrollable]="true" [responsive]="true" scrollHeight="flex"
+                [loading]="loading" [virtualRowHeight]="11" [paginator]="true" [reorderableColumns]="true" (onLazyLoad)="onPageChange($event)" [showCurrentPageReport]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th>Action</th>
+                    <th pSortableColumn="{{ col.header }}" *ngFor="let col of Tablecolumns">
+                      {{ col.header }}
+                      <p-columnFilter #column field="{{col.field}}" matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false"
+                        *ngIf="col.filtertype=='select1'" [showClearButton]="false" [showApplyButton]="false">
+                        <ng-template pTemplate="header">
+                          <div class="text-center" style="padding-left: 45px;margin-top: 10px;" hidden>
+                            <span class="font-bold text-center" style="text-transform:capitalize">{{col.field}} Picker</span>
+                          </div>
+                        </ng-template>
+                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+
+                          <p-multiSelect [options]="fitered_Data" [ngModel]="value" placeholder="Any" (onClick)="getfilterlist(col.field);" [optionValue]="col.field"
+                            display="chip" [virtualScroll]="true" [itemSize]="22" [style]="{width:'300px'}" #multiInput [ngClass]="'selectfilter'">
+                            <ng-template let-option pTemplate="item">
+                              <div class="p-multiselect-{{col.field}}-option">
+                                <span>{{option[col.field]}} {{value}}</span>
+                              </div>
+                            </ng-template>
+                            <p-footer>
+                              <div class="p-column-filter-buttonbar ng-tns-c105-5 ng-star-inserted my-buttonbar">
+                                <button type="button" class="p-element p-button-outlined p-button-sm ng-tns-c105-5 p-button p-component ng-star-inserted" ng-reflect-label="Clear"
+                                  (click)="column.clearFilter()"><span class="p-button-label">Clear</span>
+                                </button>
+                                <button type="button" class="p-element p-button-sm ng-tns-c105-5 p-button p-component ng-star-inserted" ng-reflect-label="Apply"
+                                  (click)="column.applyFilter();filter(multiInput.value);"><span class="p-button-label">Apply</span>
+                                </button>
+                              </div>
+                            </p-footer>
+                          </p-multiSelect>
+                        </ng-template>
+                      </p-columnFilter>
+
+                    </th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-i="index">
+                  <tr class="spacer">
+                    <td></td>
+                  </tr>
+                  <tr class="data">
+                    <td>
+                      <div class="actions">
+                        <a class="btn btn-sm bg-danger-light rounded-circle" (click)="edititems(rowData)"> <i class="fa-regular fa-pen-to-square"></i> </a>
+                        <a class="btn btn-sm bg-danger-light rounded-circle" (click)="deleteitems(rowData)"> <i class="fa-solid fa-trash-can text-danger"></i> </a>
+                      </div>
+                    </td>
+
+                    <td *ngFor="let col of Tablecolumns" [ngSwitch]="true">
+                      <span *ngSwitchCase="col.formattype==='image'">
+                        <img src="{{rowData['Product_Img']}}" alt="" width="100" class="shadow-4 rounded">
+                      </span>
+                      <span *ngSwitchCase="col.formattype==='date'">
+                        {{ rowData[col.field] | date: 'dd/MM/yyyy'}}
+                      </span>
+                      <span *ngSwitchDefault> {{ rowData[col.field]}} </span>
+                    </td>
+
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </div>
+        </div>
+
+        <!--form datat-->
+        <p-dialog [modal]="true" header="{{formdynamicconfig.title}}" [(visible)]="productDialog" styleClass="bg-comman border-primary">
+          <form class="row needs-validation bg-white" #savenewproductform="ngForm" (ngSubmit)="this[dyfunform](savenewproductform,tempfile,formdata.id)" ngNativeValidate>
+            <div *ngFor="let grid of formconfig.grid" class="col-md-{{grid['colsize']}} mb-4">
+              <div *ngFor="let cd of formconfig.fields;let i=index">
+                <div class="p-fluid mb-3" *ngIf="grid.colname==cd.colname">
+                  <label>{{cd.label}} <span class="login-danger">*</span></label>
+                  <input class="form-control py-2" type="{{cd.type}}" [(ngModel)]="formdata[cd.name]" name="{{cd.name}}" required *ngIf="cd.elementtype=='input'">
+                  <select class="form-select py-2" id="validationCustom04" required *ngIf="cd.elementtype=='dropdown'" [(ngModel)]="formdata[cd.name]" name="{{cd.name}}">
+                    <option selected disabled>...</option>
+                    <option *ngFor="let value of cd.value">{{value}}</option>
+                  </select>
+                  <p-calendar *ngIf="cd.elementtype=='date'" [ngModel]="formdata[cd.name] | date: 'MM/dd/yyyy'" name="{{cd.name}}" appendTo="body" [showButtonBar]="true" [showIcon]="true"></p-calendar>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <button class="btn btn-primary bg-ems-primary border-ems-primary py-sm-2 px-sm5 me-2" type="submit">{{formdynamicconfig.buttonlabel}}</button>
+            </div>
+          </form>
+        </p-dialog>
+
+        <p-toast></p-toast>
+        <p-confirmDialog></p-confirmDialog>
+      </div>
+    </div>
+  </div>
+</section>
+
+<p-dialog [modal]="true" header="Upload File" [(visible)]="invoiceprint" [maximizable]="true" styleClass="bg-comman border-primary">
+  <input type="file" (change)="handleFile($event)" accept=".xlsx" class="form-control">
+</p-dialog>
+

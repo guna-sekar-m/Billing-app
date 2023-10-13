@@ -1,0 +1,125 @@
+.sidebar {
+  bottom: 0;
+  left: 0;
+  margin-top: 0;
+
+  top: 55px;
+  transition: all 0.2s ease-in-out 0s;
+  width: 220px;
+  z-index: 1001;
+  background: #FFFFFF;
+
+}
+
+
+.offcanvas-body{
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+
+}
+
+.offcanvas-body:hover{
+  overflow: auto;
+}
+
+.nav-item .nav-link {
+  font-size: 16px;
+  height: auto;
+  padding: 12px 15px;
+  transition: all 0.2s ease-in-out 0s;
+}
+
+.nav-item .nav-link.active,.nav-item .nav-link:hover {
+  background-color: var(--hover-bg);
+  color: var(--primary-ems-color);
+  position: relative;
+  margin: 0px -15px;
+  padding-left: 30px;
+  border-top-right-radius:12px;
+  border-bottom-right-radius:12px;
+  box-shadow: var(--back-shadow);
+}
+
+.nav-item .nav-link.active::before {
+  width: 6px;
+  content: "";
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: var(--primary-ems-color);
+  -webkit-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  transition: all 0.5s;
+  border-radius: 0px 8px 8px 0px;
+}
+.nav-item .nav-link span {
+  transition: all 0.2s ease-in-out 0s;
+  display: inline-block;
+  margin-left: 10px;
+  white-space: nowrap;
+
+}
+.menu-title {
+  color: #9e9e9e;
+  display: flex;
+  font-size: 14px;
+  opacity: 1;
+  padding: 5px 15px;
+  white-space: nowrap;
+}
+
+.sidbar-shadow{
+  box-shadow: 1px 2px 2px rgba(0, 0, 0, .1), 1px 2px 5px rgba(0, 0, 0, .1);
+}
+
+
+
+#header h6 {
+	font-size: 18px;
+  margin: 0;
+  display: inline-block;
+  -webkit-font-smoothing: antialiased;
+}
+
+#header a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.ribbon {
+  background-color:#e45252; /* bg color for center of ribbon */
+  border:3px solid #f1db10; /*border color for center of ribbon */
+  padding: 0 20px;
+
+  display: inline-block;
+  position: relative;
+  margin-left: 26px;
+  margin-right: 26px;
+}
+
+.ribbon:before, .ribbon:after {
+  content: '.';
+  text-indent: -9999em;
+  height: 0;
+  width: 0;
+  border-style: solid;
+  border-width: 10px;
+  position: absolute;
+  left: -15px;
+  top: 10px;
+  display: block;
+  z-index: -1;
+}
+
+.ribbon:before {
+  border-color: #e45252 #e45252 #e45252 transparent;
+
+}
+
+.ribbon:after {
+  border-color: #e45252 transparent #e45252 #e45252;
+  right: -15px;
+  left: auto;
+}
